@@ -1,0 +1,113 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+label{
+    font-family: 'Open Sans',sans-serif;
+}
+#regForm {
+    background-color: #ffffff;
+    margin: 0 auto;
+    font-family: Raleway;
+    padding: 40px;
+    min-width: 300px;
+}
+.d-flex-content {
+    display: flex;
+    justify-content: space-between;
+}
+.width-mar {
+    margin-right: 10px;
+    width: 100%;
+}
+.wts_regForm input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: 'Open Sans',sans-serif;
+    border: 1px solid #30c7b5;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 1px #ddd;
+}
+.wts_regForm input.invalid {
+    background-color: #ffdddd;
+}
+.wts_regForm .tab {
+    display: none;
+}
+.wts_regForm button, .add_passenger_btn{
+    color: white !important;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 0.75rem;
+    border-radius: 5px;
+    padding: 18px 45px !important;
+    font-weight: 600;
+    line-height: 1em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    background-color: var(--ast-global-color-0);
+    background-image: linear-gradient(90deg, #00000080, #30c7b5) !important;
+}
+.wts_regForm button:hover {
+    opacity: 0.8;
+}
+.wts_regForm #prevBtn {
+
+}
+.add_passenger_btn:hover{
+    color: inherit;
+}
+.wts_regForm .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+.wts_regForm .step.active {
+    opacity: 1;
+}
+.wts_regForm .step.finish {
+    background-color: #04AA6D;
+}
+.sb_product_main{
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+}
+.sb_product_option{
+    width: 100%;
+}
+.sb_product_list_main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sb_product_list_option{
+    width: 100%;
+    height: 81px;
+    border-radius: 12px 0px 0px 12px;
+    text-indent: 6px;
+    -webkit-appearance: listbox !important;
+    background-image: none !important;
+}
+.sb_product_list_btn {
+    width: 33%;
+    margin-left: 10px;
+    text-align: center;
+    background-color: #FFBB36;
+    border-radius: 0px 12px 12px 0px;
+    padding: 23px 25px 23px 25px;
+    line-height: 35px;
+}
+.sb_product_list_btn a{
+    color: black !important;
+    font-family: "Outfit", Sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+}
