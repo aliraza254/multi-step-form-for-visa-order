@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Visa Order
  * Plugin URI:        https://#
- * Description:       Add these short codes to show multistep form all_products_list, multi_step_form_function.
+ * Description:       Add these short codes to show multistep form all_products_list, multi_step_form.
  * Version:           1.0.0
  * Author:            Web Tech Softs
  * Author URI:        https://https://webtechsofts.com/

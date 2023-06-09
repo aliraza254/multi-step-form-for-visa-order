@@ -180,8 +180,6 @@ class Visa_Order {
         add_shortcode( 'all_products_list', array($shortcode_admin, 'all_products_list_function') );
         add_shortcode( 'multi_step_form', array($shortcode_admin, 'multi_step_form_function') );
         $this->loader->add_action( 'wp_footer', $shortcode_admin, 'wp_footer_function' );
-//        $this->loader->add_action( 'admin_post_sb_add_product_in_cart', $shortcode_admin, 'sb_add_product_in_cart' );
-//        $this->loader->add_action( 'admin_post_nopriv_sb_add_product_in_cart', $shortcode_admin, 'sb_add_product_in_cart' );
         $this->loader->add_filter( 'woocommerce_add_cart_item_data', $shortcode_admin, 'woocommerce_add_item_data_function', 99, 2 );
         $this->loader->add_filter( 'woocommerce_get_item_data', $shortcode_admin, 'woocommerce_get_item_data_function', 99, 2 );
         $this->loader->add_filter( 'woocommerce_checkout_create_order_line_item', $shortcode_admin, 'woocommerce_checkout_create_order_line_item_function', 99, 4 );

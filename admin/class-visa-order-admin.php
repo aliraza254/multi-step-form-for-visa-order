@@ -105,33 +105,35 @@ class Visa_Order_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function woocommerce_product_options_general_product_data_function() {
+    public function woocommerce_product_options_general_product_data_function() {
         global $woocommerce;
-        $countries_obj   = new WC_Countries();
-        $countries   = $countries_obj->__get('countries');
+        $countries_obj = new WC_Countries();
+        $countries = $countries_obj->__get('countries');
+        $selected_country = get_post_meta(get_the_ID(), 'country_list', true);
         ?>
         <div class="product_custom_field">
             <p class="form-field country_list_field ">
                 <label for="country_list">Sale price ($)</label>
                 <select name="country_list" id="country_list">
                     <option value="">Select Country</option>
-                    <?php foreach ($countries as $single) {?>
-                        <option value="<?php echo $single; ?>"><?php echo $single; ?></option>
+                    <?php foreach ($countries as $single) { ?>
+                        <option value="<?php echo $single; ?>" <?php selected($selected_country, $single); ?>><?php echo $single; ?></option>
                     <?php } ?>
                 </select>
             </p>
         </div>
         <?php
-	}
+    }
 
-	/**
-	 * save countries from products table.
-	 *
-	 * @since    1.0.0
-	 */
-	public function woocommerce_admin_process_product_object_function($product) {
-        if (isset($_POST['country_list']))
+    /**
+     * Save countries from products table.
+     *
+     * @since    1.0.0
+     */
+    public function woocommerce_admin_process_product_object_function($product) {
+        if (isset($_POST['country_list'])) {
             $product->update_meta_data('country_list', sanitize_text_field($_POST['country_list']));
-	}
+        }
+    }
 
 }

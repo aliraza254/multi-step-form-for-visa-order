@@ -120,6 +120,7 @@ class Visa_Order_ShortCode {
             'shipping_class'    => array(),
         );
         $products = wc_get_products( $args );
+        $options = get_option( 'visa_order_options' );
         ?>
             <div class="sb_product_list_main">
                 <div style="width: 100%">
@@ -137,7 +138,7 @@ class Visa_Order_ShortCode {
                     </select>
                 </div>
                 <div class="sb_product_list_btn">
-                    <a href="<?php echo get_permalink(get_option( 'visa_order_options' )[0])?>">APPLY NOW</a>
+                    <a href="<?php echo get_permalink($options['visa_order_csv_file'])?>">APPLY NOW</a>
                 </div>
             </div>
         <?php
@@ -145,9 +146,8 @@ class Visa_Order_ShortCode {
 
     public function multi_step_form_function(){
         ?>
-        <form class="wts_regForm cart" id="regForm" method="post" action="<?php echo get_home_url()?>?page_id=649" enctype="multipart/form-data">
-            <input type="hidden" name="action" value="sb_add_product_in_cart">
-            <input type="hidden" class="qty sb_qty" name="quantity" value="1" >
+        <form class="wts_regForm cart" id="regForm" method="post"  enctype="multipart/form-data">
+            <input type="hidden" class="qty sb_qty" name="quantity" value="1">
             <input type="hidden" name="pro_id" value="<?php echo (isset($_GET['pro_id'])) ? $_GET['pro_id'] : ''; ?>">
             <div class="tab_parent" id="tab_parent_1">
                 <div class="d-flex-content">
@@ -193,7 +193,7 @@ class Visa_Order_ShortCode {
                 <div>
                     <a id="add_passenger" class="add_passenger_btn" >Add Passenger</a>
                     <button type="button" id="prevBtn" class="prev_step" data-prev="tab_parent_1">Previous</button>
-                    <button type="submit" name="add-to-cart" data-next="submit" value="<?php echo (isset($_GET['pro_id'])) ? $_GET['pro_id'] : '651'; ?>" class=" next_step button alt">Submit</button>
+                    <button type="submit" name="add-to-cart" data-next="submit" value="<?php echo (isset($_GET['pro_id'])) ? $_GET['pro_id'] : '150'; ?>" class=" next_step button alt">Submit</button>
                 </div>
             </div>
         </form>
@@ -259,31 +259,6 @@ class Visa_Order_ShortCode {
         <?php
     }
 
-    public function sb_add_product_in_cart(){
-        $pro_id = (isset($_POST['pro_id'])) ? $_POST['pro_id'] : 651;
-        echo $pro_id;
-        die();
-        $customer_details['fname'] = $_POST['fname'];
-        $customer_details['lname'] = $_POST['lname'];
-        $customer_details['nationality'] = $_POST['nationality'];
-        $customer_details['contact_number'] = $_POST['contact_number'];
-        $customer_details['email'] = $_POST['email'];
-        $p_count = count($_POST['passenger_count']);
-        $passengers = [];
-        for ($i = 1; $i <= $p_count; $i++){
-            $passengers[$i]['first_name'] = $_POST['first_name_p'.$i];
-            $passengers[$i]['last_name'] = $_POST['last_name_p'.$i];
-            $passengers[$i]['dob'] = $_POST['dob_p'.$i];
-            $passengers[$i]['pass_num'] = $_POST['pass_num_p'.$i];
-            $passengers[$i]['pass_issue'] = $_POST['pass_issue_p'.$i];
-            $passengers[$i]['pass_ex'] = $_POST['pass_ex_p'.$i];
-//            $passengers[$i]['passport'] = $this->sb_upload_files('passport_p'.$i);
-//            $passengers[$i]['profile'] = $this->sb_upload_files('profile_p'.$i);
-        }
-        $customer_details['passengers'] = $passengers;
-
-    }
-
     public function sb_upload_files($file){
         $file_name = $_FILES[$file]['name'];
         $file_temp = $_FILES[$file]['tmp_name'];
@@ -335,6 +310,7 @@ class Visa_Order_ShortCode {
         $cart_item_data['customer_details'] = $cart_data;
         return $cart_item_data;
     }
+
     public function woocommerce_get_item_data_function( $item_data, $cart_item){
         $count = 1;
         if ( isset($cart_item['customer_details'])) {
@@ -366,6 +342,7 @@ class Visa_Order_ShortCode {
         }
         return $item_data;
     }
+
     public function woocommerce_checkout_create_order_line_item_function( $item, $cart_item_key, $values, $orders){
         $count = 1;
         if ( isset($values['customer_details'])) {
@@ -390,22 +367,26 @@ class Visa_Order_ShortCode {
             }
         }
     }
+
     public function woocommerce_add_to_cart_redirect_function( $url ){
         return wc_get_checkout_url();
     }
+
     public function woocommerce_add_to_cart_validation_function( $passed ){
         if( ! WC()->cart->is_empty() )
             WC()->cart->empty_cart();
         return $passed;
     }
+
     public function wp_footer_function(){
+        $options = get_option( 'visa_order_options' );
         ?>
         <script>
             jQuery(document).ready(function ($){
-                var url = "<?php echo get_permalink(get_option( 'visa_order_options' )[0])?>";
+                var url = "<?php echo get_permalink($options['visa_order_csv_file'])?>";
                 $('.sb_product_list_option').change(function (){
                     var val = $(this).val();
-                    $('.sb_product_list_btn a').attr('href', url+'&pro_id='+val);
+                    $('.sb_product_list_btn a').attr('href', url+'?pro_id='+val);
                 })
             });
         </script>
